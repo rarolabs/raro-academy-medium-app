@@ -8,8 +8,7 @@ export const RitchTextEditor: React.FC<RitchTextEditorProps> = ({
   label,
   name,
 }) => {
-  const mdParser = new MarkdownIt(/* Markdown-it options */);
-  
+  const mdParser = new MarkdownIt();
   function handleEditorChange({ html, text }: any) {
     console.log(html, text);
   }

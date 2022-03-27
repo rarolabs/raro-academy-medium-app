@@ -1,4 +1,5 @@
 import React from "react";
+import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
 export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
@@ -10,13 +11,6 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   autor,
   editavel,
 }) => {
-  const formataData = (date: Date) => {
-    return Intl.DateTimeFormat(
-      'pt-BR',
-      { month: 'short', day: '2-digit', year: 'numeric' }
-    ).format(date);
-  }
-  
   return (
     <div className="w-10/12 flex flex-col mt-5">    
       <header className="flex flex-row gap-3 items-center">
