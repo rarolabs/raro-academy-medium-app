@@ -28,7 +28,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
         <div>{ autor.nome }</div>
         <div className="text-sm text-gray-500">{ formataData(dataPublicacao) }</div>
       </header>
-      <Link to={`artigo/${id}`}> 
+      <Link to={`/artigo/${id}`}> 
         <div className="grid grid-cols-4 gap-3">
           <div className="col-span-3 flex flex-col">
             <div className="font-bold text-lg pt-3">
@@ -49,7 +49,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
         </div>
         {
           editavel && (
-            <button
+            <Link
               className={
                 `
                 hover:bg-blue-400 bg-blue-300 text-white
@@ -57,9 +57,10 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
                 rounded-full py-1 px-2 text-xs
                 `
               }
+              to={`/artigo/edit/${id}`}
             >
               Editar
-            </button>
+            </Link>
           )
         }
       </footer>
