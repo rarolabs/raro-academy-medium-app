@@ -18,6 +18,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
           src={ autor.avatar }
           className="rounded-full"
           style={{ width: '30px', height: '30px' }}
+          alt=""
         />
         <div>{ autor.nome }</div>
         <div className="text-sm text-gray-500">{ formataData(dataPublicacao) }</div>
@@ -32,7 +33,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
           </div>
         </div>
         <div className="flex items-center" style={{ maxHeight: '100px' }}>
-          <img className="mt-10" src={ imagem } />
+          <img className="mt-10" src={ imagem } alt=""/>
         </div>
       </div>
       <footer className="flex flex-row pt-7 gap-3 items-center">
