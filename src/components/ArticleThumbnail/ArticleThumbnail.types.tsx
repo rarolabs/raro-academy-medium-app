@@ -1,3 +1,5 @@
+import { NumericLiteral } from "typescript";
+
 export type ArticleThumbnailProps = {
   imagem: string;
   titulo: string;
@@ -9,4 +11,5 @@ export type ArticleThumbnailProps = {
     avatar: string;
   };
   editavel?: boolean;
+  id: number;
 }
