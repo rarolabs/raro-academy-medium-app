@@ -12,7 +12,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   editavel,
 }) => {
   return (
-    <div className="w-10/12 flex flex-col mt-5">    
+    <div className="flex flex-col w-2/3 mt-5">    
       <header className="flex flex-row gap-3 items-center">
         <img
           src={ autor.avatar }
@@ -31,8 +31,8 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
             { resumo }
           </div>
         </div>
-        <div className="flex items-center" style={{ maxHeight: '100px' }}>
-          <img className="mt-10" src={ imagem } />
+        <div className="flex items-center h-[100px]">
+          <img className="mt-10" src={ imagem } alt={`imagem-do-artigo-${titulo}`}/>
         </div>
       </div>
       <footer className="flex flex-row pt-7 gap-3 items-center">
