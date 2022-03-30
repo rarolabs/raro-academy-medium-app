@@ -1,5 +1,12 @@
 # Raro Academy Medium App
 
+## Tour no projeto
+
+- Para conseguirmos desenvolver todas as funcionalidades que desejamos, vamos trabalhar com um repositório dos componentes básicos já iniciados. Este repositório poderá ser acessado aqui [nesse link](https://github.com/pauloFernandes/raro-academy-medium-app).
+- Este projeto foi iniciado com o [create-react-app](https://create-react-app.dev/), uma biblioteca que nos ajuda com o setup de aplicações react, em geral, basicamente com quase tudo que precisamos, para começar.
+- Para estilização dos componentes, optamos pelo uso do [tailwind](https://tailwindcss.com/). Esta biblioteca nos ajuda a criar um template legal, através de estilos pré-definidos e de fácil acesso, através de classes utilitárias.
+- Como já desejávamos apresentar nosso componentes, ainda somente "recortados", utilizamos o [storybook](https://storybook.js.org/), que nos permite criar um ambiente de desenvolvimento, onde podemos testar os componentes que desejamos, ainda sem integra-los à aplicação como um todo. Esta modalidade de trabalho tende a criar componentes melhor documentado e melhor separados entre si.
+
 ## Requisitos da aplicação - Resumo
 
 - Qualquer usuário pode acessar uma tela com a lista de todos os artigos
@@ -10,7 +17,7 @@
 - Este tipo de aplicação exige que nossos usuários possam **navegar** por diferentes telas, cada uma com seu próprio aspecto, regras e funções.
 - Ele nos demanda ainda que algumas das telas sejam acessíveis somente para usuários que atendam a determinadas condições. No nosso caso, o `CRUD` de artigos deve ser acessível somente para os usuários logados na nossa aplicação.
 
-## Requisitos que precisão ser detalhes
+## Requisitos da aplicação - Cenários
 
 > ### **1. Funcionalidade: Consumo dos artigos publicados**
 >

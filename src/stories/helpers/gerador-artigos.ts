@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker';
-import { ArticleThumbnailProps } from '../../components/ArticleThumbnail/ArticleThumbnail.types';
+import { faker } from "@faker-js/faker";
+import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
 
 export const geraArtigos = (quantidade: number): ArticleThumbnailProps[] => {
   return Array.from(new Array(quantidade)).map(() => ({
@@ -11,6 +11,6 @@ export const geraArtigos = (quantidade: number): ArticleThumbnailProps[] => {
     autor: {
       nome: faker.name.firstName(),
       avatar: faker.image.avatar(),
-    }
+    },
   }));
-}
+};
