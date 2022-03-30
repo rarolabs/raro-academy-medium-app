@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ArticleThumbnail } from '../../components/ArticleThumbnail';
-import { geraArtigos } from '../helpers/gerador-artigos';
+import { geraArtigos } from '../../helpers/gerador-artigos';
 
 export default {
   title: 'Medium/ArticleThumbnail',

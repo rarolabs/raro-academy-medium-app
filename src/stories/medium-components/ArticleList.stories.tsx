@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ArticleList } from '../../components/ArticleList';
-import { geraArtigos } from '../helpers/gerador-artigos';
+import { geraArtigos } from '../../helpers/gerador-artigos';
 
 export default {
   title: 'Medium/ArticleList',
