@@ -7,6 +7,7 @@ import { MeusArtigosPage } from './pages/MeusArtigos';
 import { EditarArquivoPage } from './pages/EditarArquivo';
 import { NotFoundPage } from './pages/NotFound';
 import { Layout } from './components/Layout';
+const auth = true
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route index element={<ArtigosPage />} />
           <Route path="/artigo/:id" element={<ArtigoPage />} />
           <Route path="/artigos" element={<MeusArtigosPage />} />
-          <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
+          <Route path="/artigo/editar/:id" element={<EditarArquivoPage />} />
           <Route path="/artigos/novo" element={<EditarArquivoPage />} />
         </Route>
 
