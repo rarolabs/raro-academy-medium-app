@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
@@ -10,9 +11,11 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   tempoLeitura = '7 min',
   autor,
   editavel,
+  id
 }) => {
   return (
     <div className="flex flex-col w-2/3 mt-5">
+      <Link to={`/artigo/${id}`}>
         <header className="flex flex-row gap-3 items-center">
           <img
             src={ autor.avatar }
@@ -35,26 +38,29 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
             <img className="mt-10" src={ imagem } alt={`imagem-do-artigo-${titulo}`}/>
           </div>
         </div>
-      <footer className="flex flex-row pt-7 gap-3 items-center">
-        <div className="text-gray-500 text-xs my-1">
-          { tempoLeitura } de leitura
-        </div>
-        {
-          editavel && (
-            <button
-              className={
-                `
-                hover:bg-blue-400 bg-blue-300 text-white
-                delay-100 duration-100
-                rounded-full py-1 px-2 text-xs
-                `
-              }
-            >
-              Editar
-            </button>
-          )
-        }
-      </footer>
+      </Link>
+      <Link to={'/artigo/editar/:id'}>
+        <footer className="flex flex-row pt-7 gap-3 items-center">
+          <div className="text-gray-500 text-xs my-1">
+            { tempoLeitura } de leitura
+          </div>
+          {
+            editavel && (
+              <button
+                className={
+                  `
+                  hover:bg-blue-400 bg-blue-300 text-white
+                  delay-100 duration-100
+                  rounded-full py-1 px-2 text-xs
+                  `
+                }
+              >
+                Editar
+              </button>
+            )
+          }
+        </footer>
+      </Link>
       <hr className="mt-5" />
     </div>
   );
