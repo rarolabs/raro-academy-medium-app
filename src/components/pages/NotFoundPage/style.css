@@ -1,0 +1,23 @@
+.notfound {
+    height: 920px;
+    background-color: blue;
+
+}
+
+.h1 {
+    display: flex;
+    padding-top: 300px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    color: white;
+}
