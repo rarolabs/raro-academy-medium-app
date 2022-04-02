@@ -3,4 +3,7 @@ export type RitchTextEditorProps = {
   label: string;
   placeholder?: string;
   required?: boolean;
+  // adicionamos value e onChange no input.
+  value?: string;
+  onChange?: (value: string) => void;
 }

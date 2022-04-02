@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import React from 'react'
 
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
-import { geraArtigos } from "../../stories/helpers/gerador-artigos";
-import axios from 'axios'
+import apiClient from '../../services/api-client';
 
 
 export const MeusArtigosPage = () => {
@@ -15,13 +13,8 @@ export const MeusArtigosPage = () => {
     const token = localStorage.getItem("access_token");
     // através de generics, posso informar ao axios o tipo de objeto que vamos
     // operar.
-    const response = await axios.get<ArticleThumbnailProps[]>(
-      'http://3.221.159.196:3307/artigos/meus-artigos',
-      {
-        headers: {
-          'Authorization': `bearer ${token}`
-        }
-      }
+    const response = await apiClient.get<ArticleThumbnailProps[]>(
+      '/artigos/meus-artigos'
     );
     setArticles(response.data);
   }
