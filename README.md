@@ -7,6 +7,9 @@
 - Para estilização dos componentes, optamos pelo uso do [tailwind](https://tailwindcss.com/). Esta biblioteca nos ajuda a criar um template legal, através de estilos pré-definidos e de fácil acesso, através de classes utilitárias.
 - Como já desejávamos apresentar nosso componentes, ainda somente "recortados", utilizamos o [storybook](https://storybook.js.org/), que nos permite criar um ambiente de desenvolvimento, onde podemos testar os componentes que desejamos, ainda sem integra-los à aplicação como um todo. Esta modalidade de trabalho tende a criar componentes melhor documentado e melhor separados entre si.
 
+<img src="./.github/printscreen.png" alt="Demo" width="500"/>
+
+
 ## Requisitos da aplicação - Resumo
 
 - Qualquer usuário pode acessar uma tela com a lista de todos os artigos

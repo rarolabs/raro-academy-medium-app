@@ -23,7 +23,9 @@ Seguem abaixo os requisitos básicos de nossa aplicação:
   - criar novos artigos;
   - abrir seu painel de edição;
   - remover artigos.
-Ao final dos trabalhos, nossa aplicação deverá se comportar de forma semelhante a [esta](http://3.221.159.196:3308/).
+Ao final dos trabalhos, nossa aplicação deverá se comportar de forma semelhante a [esta](http://3.221.159.196:3308/). 
+<!-- 
+http://3.221.159.196:3307/api-docs/#/ -->
 
 ## Tour no projeto
 
