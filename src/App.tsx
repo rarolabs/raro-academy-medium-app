@@ -9,6 +9,7 @@ import {ArtigoPage} from './pages/ArtigoPage/index';
 import {MeusArtigosPage} from './pages/MeusArtigosPage';
 import {EditarArquivoPage} from './pages/EditarArquivoPage';
 import {NotFoundPage} from './pages/NotFoundPage';
+import {Layout} from './components/Layout';
 
 
 function App() {
@@ -16,13 +17,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<ArtigosPage />} />
-        <Route path="/artigo/:id" element={<ArtigoPage />} />
-        <Route path="/artigos" element={<MeusArtigosPage />} />
-        <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
-        <Route path="/artigos/novo" element={<EditarArquivoPage />} />
 
-        <Route path="*" element={<NotFoundPage />} /> 
+        <Route path="/" element={<Layout />}>
+          <Route index element={<ArtigosPage />} />
+          <Route path="/artigo/:id" element={<ArtigoPage />} />
+          <Route path="/artigos" element={<MeusArtigosPage />} />
+          <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
+          <Route path="/artigos/novo" element={<EditarArquivoPage />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import {useState,useEffect} from "react";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
@@ -9,8 +10,17 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   dataPublicacao,
   tempoLeitura = '7 min',
   autor,
-  editavel,
 }) => {
+
+  const [editavel, setEditavel] = useState(false);
+
+  useEffect(() => {
+    // este Number(...) é necessário, pois o localStorage armazena strings. Nosso autor.id é
+    // numérico.
+   const usuarioAtual = Number(localStorage.getItem('usuarioId'));
+   setEditavel(autor.id === usuarioAtual);
+  }, [autor]);
+
   return (
     <div className="w-10/12 flex flex-col mt-5">    
       <header className="flex flex-row gap-3 items-center">

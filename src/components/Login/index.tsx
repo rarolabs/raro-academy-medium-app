@@ -2,19 +2,22 @@ import { Button } from "../Button";
 import { Input } from "../Input";
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
-const axios=require('axios').default
 
 export const Login = () => {
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState("");
  
 
   async function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
+    setErro("");
+    console.log(login,senha)
     try{
       const url = `http://3.221.159.196:3307/auth/login`;
       const response = await axios.post(
@@ -27,11 +30,13 @@ export const Login = () => {
         localStorage.setItem("id", id);
         navigate("/artigos");
       }
-    }catch (error:any) {
-      if(error.response.status === 401){
-        alert("Login ou senha incorretos");
+    } catch (error: any) {
+      // em caso de erro de autenticação (https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401),
+      // enviamos uma mensagem específica para "usuário ou senha inválidos"
+      if (error.response.data.statusCode === 401) {
+        setErro('Usuário ou senha Inválidos');
       } else {
-        alert("Erro ao autenticar. Consulte o suporte");
+        setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
       }
     }
     setLoading(false);
@@ -79,6 +84,13 @@ export const Login = () => {
             type="submit"
             >{loading ? 'Carregando...' : 'Entrar'}</Button>
           </div>
+          {
+            erro ? (
+              <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                { erro }
+              </span>
+            ) : <></>
+          }
         </form>
       </div>
     </div>
