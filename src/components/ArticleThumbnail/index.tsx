@@ -48,16 +48,18 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
         <div className="text-gray-500 text-xs my-1">
           {tempoLeitura} de leitura
         </div>
-        {editavel && (
-          <button
-            className={`
+        {true && (
+          <Link to={`/articles/edit/${id}`}>
+            <button
+              className={`
                 hover:bg-blue-400 bg-blue-300 text-white
                 delay-100 duration-100
                 rounded-full py-1 px-2 text-xs
                 `}
-          >
-            Editar
-          </button>
+            >
+              Editar
+            </button>
+          </Link>
         )}
       </footer>
       <hr className="mt-5" />
