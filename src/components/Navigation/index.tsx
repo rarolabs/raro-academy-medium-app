@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 export const Navigation = () => {
   return (
     <>
-      <Link to="/">Home</Link>
-      <Link to="/articles">Meus Artigos</Link>
-      <Link to="/articles/new">Novo Artigo</Link>
+      <Link to="/">HOME</Link>
+      <Link to="/login">LOGIN</Link>
+      <Link to="/articles">MEUS ARTIGOS</Link>
+      <Link to="/articles/new">NOVO ARTIGO</Link>
+      <Link to="/">LOGOUT</Link>
     </>
   );
 };
