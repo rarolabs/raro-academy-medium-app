@@ -6,6 +6,8 @@ export type InputProps = {
   placeholder?: string;
   type: HTMLInputTypeAttribute | 'textarea';
   required?: boolean;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export const Input: React.FC<InputProps> = ({
