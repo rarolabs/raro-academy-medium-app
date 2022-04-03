@@ -3,4 +3,6 @@ export type RitchTextEditorProps = {
   label: string;
   placeholder?: string;
   required?: boolean;
+  onChange?: (value: string) => void;
+  value?: string 
 }

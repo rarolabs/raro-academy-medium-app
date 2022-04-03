@@ -7,7 +7,7 @@ import { MeusArtigosPage } from './pages/MeusArtigos';
 import { EditarArquivoPage } from './pages/EditarArquivo';
 import { NotFoundPage } from './pages/NotFound';
 import { Layout } from './components/Layout';
-const auth = true
+
 
 function App() {
   return (
