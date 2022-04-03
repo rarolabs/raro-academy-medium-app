@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
@@ -11,12 +11,17 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   dataPublicacao,
   tempoLeitura = '7 min',
   autor,
-  editavel,
 }) => {
+  const verArtigo = `/artigo/${id}`
+  const editarArtigo = `/artigos/editar/${id}`
+  const [ editavel, setEditavel ] = useState(false)
 
-  console.log("ids:", id)
-  const verArtigo = `/artigo/:${id}`
-  const editarArtigo = `/artigos/editar/:${id}`
+  useEffect (()=> {
+    const idLocalStorage = Number(localStorage.getItem("id"))
+
+    setEditavel(idLocalStorage === autor.id)
+
+  }, [autor])
 
   return (
     <div className="flex flex-col w-2/3 mt-5">
@@ -55,7 +60,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
           {tempoLeitura} de leitura
         </div>
         {
-          // editavel &&
+          editavel &&
            (
             <Link to={editarArtigo}>
               <button
