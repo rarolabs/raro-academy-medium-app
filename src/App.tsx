@@ -17,6 +17,7 @@ const App = () => {
     <Route path="/artigos/novo" element={<EditarArquivoPage />} /> */}
 
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
