@@ -7,10 +7,12 @@ import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/Article
 import { useNavigate } from "react-router-dom";
 
 export const EditarArquivoPage = () => {
-
+  
   const [ artigo, setArtigo ] = useState<ArticleThumbnailProps>()
   const { id } = useParams();
   
+  const token = localStorage.getItem("access_token");
+
   const navigate = useNavigate()
  
   useEffect(() => { 
@@ -20,7 +22,7 @@ export const EditarArquivoPage = () => {
   }, [id]);
 
   async function buscarArtigo() {
-    const token = localStorage.getItem("access_token");
+    
     const response = await axios.get<ArticleThumbnailProps>(
       `http://3.221.159.196:3307/artigos/${id}`,
       {
@@ -33,7 +35,6 @@ export const EditarArquivoPage = () => {
   }
   
   async function handleSubmit (artigo: ArticleThumbnailProps) {
-    const token = localStorage.getItem("access_token");
 
     if (artigo.id) {
       await axios.patch(
@@ -42,7 +43,7 @@ export const EditarArquivoPage = () => {
         {
           headers: {
             'Authorization': `bearer ${token}`
-          }}
+        }}
       )   
       navigate(`/artigo/${artigo.id}`)    
     } else {
@@ -52,10 +53,22 @@ export const EditarArquivoPage = () => {
         {
           headers: {
             'Authorization': `bearer ${token}`
-          }}
+        }}
       )
       navigate(`/artigos`)
     }
+  }
+  
+  async function handleDelete () {
+    await axios.delete(
+      `http://3.221.159.196:3307/artigos/${id}`, 
+      {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+      }
+    )
+    navigate(`/artigos`)
   }
 
   return (
@@ -63,7 +76,9 @@ export const EditarArquivoPage = () => {
       <div className="items-center justify-center m-10">
         <ArticleForm 
         article={artigo}
-        onSubmitProp={handleSubmit} />
+        onClick={handleDelete}
+        onSubmitProp={handleSubmit}
+         />
       </div>
     </>
   );
