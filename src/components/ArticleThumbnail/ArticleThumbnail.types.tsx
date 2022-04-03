@@ -1,15 +1,17 @@
 import { NumericLiteral } from "typescript";
 
 export type ArticleThumbnailProps = {
-  imagem: string;
-  titulo: string;
-  resumo: string;
-  dataPublicacao: Date;
-  tempoLeitura?: string;
+  imagem: string
+  titulo: string
+  resumo: string
+  dataPublicacao: Date
+  tempoDeLeitura?: string
   autor: {
-    nome: string;
-    avatar: string;
+    id: number
+    nome: string
+    avatar: string
   };
-  editavel?: boolean;
-  id: number;
+  editavel?: boolean
+  id: number
+  conteudo: string
 }

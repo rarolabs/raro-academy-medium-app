@@ -10,7 +10,7 @@ export const ArticleList: React.FC<ArticleListProps> = ({
       {
         articles.map(article => (
           <ArticleThumbnail
-            key={ article.titulo }
+            key={ article.id }
             {...article}
           />
         ))

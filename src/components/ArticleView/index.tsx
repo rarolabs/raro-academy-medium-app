@@ -12,8 +12,10 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
   article,
   autor,
   dataPublicacao,
+  tempoDeLeitura
 }) => {
   const mdParser = new MarkdownIt();
+  
   return (
     <>
       <header className="flex flex-row gap-3 items-center ml-20">
@@ -21,7 +23,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
         <div className="block">
           <div>{ autor.nome }</div>
           <div className="text-sm text-gray-500">
-            { formataData(dataPublicacao) } · {/* { tempoLeitura } */} 7min de leitura
+            { formataData(dataPublicacao) } · { tempoDeLeitura } de leitura
           </div>
         </div>
       </header>

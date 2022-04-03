@@ -1,4 +1,5 @@
-import React from "react";
+import faker from "@faker-js/faker";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
@@ -8,11 +9,22 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   titulo,
   resumo,
   dataPublicacao,
-  tempoLeitura = '7 min',
+  tempoDeLeitura,
   autor,
-  editavel,
   id
 }) => {
+
+  const [editavel, setEditavel] = useState(false);
+  const [tempoLeitura, setTempoLeitura] = useState(tempoDeLeitura);
+
+  useEffect(() => {
+    const userCurrent = Number(localStorage.getItem('id'));
+
+    setTempoLeitura(`${faker.datatype.number({ min: 1, max: 10 })} min`);
+
+    setEditavel(autor.id === userCurrent);
+  }, [autor])
+
   return (
     <div className="flex flex-col w-2/3 mt-5">
       <Link to={`/artigo/${id}`}>
@@ -45,13 +57,13 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
 
       </Link>
 
-      <Link to={`/artigo/edit/${id}`}>
-        <footer className="flex flex-row pt-7 gap-3 items-center">
-          <div className="text-gray-500 text-xs my-1">
-            {tempoLeitura} de leitura
-          </div>
-          {
-            editavel && (
+      <footer className="flex flex-row pt-7 gap-3 items-center">
+        <div className="text-gray-500 text-xs my-1">
+          {tempoLeitura} de leitura
+        </div>
+        {
+          editavel && (
+            <Link to={`/artigo/edit/${id}`}>
               <button
                 className={
                   `
@@ -63,10 +75,12 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
               >
                 Editar
               </button>
-            )
-          }
-        </footer>
-      </Link>
+            </Link>
+          )
+        }
+
+      </footer>
+
       <hr className="mt-5" />
     </div>
   );
