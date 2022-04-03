@@ -1,5 +1,5 @@
 export type ArticleViewProps = {
-  article: string;
+  article?: string;
   autor: {
     nome: string;
     avatar: string;
