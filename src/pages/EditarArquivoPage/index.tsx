@@ -14,7 +14,7 @@ export const EditarArquivoPage = () => {
   const token = localStorage.getItem("access_token");
 
   const navigate = useNavigate()
- 
+
   useEffect(() => { 
     if (id) {
       buscarArtigo();
@@ -47,7 +47,7 @@ export const EditarArquivoPage = () => {
       )   
       navigate(`/artigo/${artigo.id}`)    
     } else {
-      await axios.post(
+      const response = await axios.post(
         `http://3.221.159.196:3307/artigos`, 
         { ...artigo },
         {
@@ -55,7 +55,8 @@ export const EditarArquivoPage = () => {
             'Authorization': `bearer ${token}`
         }}
       )
-      navigate(`/artigos`)
+      
+      navigate(`/artigo/${response.data.id}`)
     }
   }
   
