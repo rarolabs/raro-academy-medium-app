@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
-import { geraArtigos } from "../../stories/helpers/gerador-artigos";
 
 export const ArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
@@ -12,8 +11,18 @@ export const ArtigosPage = () => {
     setArticles(response.data)
   }
   useEffect(() => { BuscarArtigos() }, []);
-  
-  return (
-    <ArticleList articles={articles} />
-  );
+
+  if (articles.length === 0) {
+    return (
+      <p>Não existem artigos publicados</p>
+    )
+
+  }
+  else {
+    return (
+      <ArticleList articles={articles} />
+
+    )
+  }
+
 };
