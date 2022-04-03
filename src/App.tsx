@@ -3,12 +3,15 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { ArtigoPage } from "./pages/Artigo/Index";
+import { ArtigosPage } from "./pages/Artigos/Index";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<ArtigosPage/> } />
         {/* <Route path="/login" element={<LoginPage />} />
     <Route path="/" element={<ArtigosPage />} />
     <Route path="/artigo/:id" element={<ArtigoPage />} />
@@ -17,7 +20,7 @@ const App = () => {
     <Route path="/artigos/novo" element={<EditarArquivoPage />} /> */}
 
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+      
       </Routes>
     </BrowserRouter>
   );
