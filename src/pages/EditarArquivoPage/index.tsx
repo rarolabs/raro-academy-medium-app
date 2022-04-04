@@ -50,6 +50,7 @@ export const EditarArquivoPage = () => {
 
   const handleDelete = async (article: ArticleThumbnailProps) => {
 
+    console.log('delete')
     if (article.id) {
     const response = await apiClient.delete<ArticleThumbnailProps>(
       `/artigos/${id}`);
