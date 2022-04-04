@@ -66,6 +66,6 @@ export const ArtigoPage = () => {
           tempoLeitura={ '10min' }
         />
       </div> :
-      <Carregando />
+      <div />
   );
 };

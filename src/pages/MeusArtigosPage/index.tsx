@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
-import { SemArtigos } from "../../components/SemArtigos";
-import { geraArtigos } from "../../stories/helpers/gerador-artigos";
 
 export const MeusArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
