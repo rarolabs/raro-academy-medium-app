@@ -11,6 +11,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   dataPublicacao,
   tempoLeitura = '7 min',
   autor,
+  remove,
 }) => {
   const verArtigo = `/artigo/${id}`
   const editarArtigo = `/artigos/editar/${id}`
@@ -60,6 +61,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
         {
           editavel &&
            (
+             <>
             <Link to={editarArtigo}>
               <button
                 className={
@@ -73,6 +75,19 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
                 Editar
               </button>
             </Link>
+            <button
+              className={
+                `
+                hover:bg-red-400 bg-red-300 text-white
+                delay-100 duration-100
+                rounded-full py-1 px-2 text-xs
+                `
+              }
+              onClick={ () => remove?.(id)  } // Matheus que tipou
+              >
+              Delete
+            </button>
+            </>
           )
         }
       </footer>

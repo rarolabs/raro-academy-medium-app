@@ -4,7 +4,8 @@ import { SemArtigos } from "../SemArtigos";
 import { ArticleListProps } from "./ArticleList.types";
 
 export const ArticleList: React.FC<ArticleListProps> = ({
-  articles
+  articles,
+  remove, 
 }) => {
   return (
     articles.length !== 0 ? 
@@ -14,8 +15,9 @@ export const ArticleList: React.FC<ArticleListProps> = ({
             <ArticleThumbnail
               key={ article.titulo }
               {...article}
+              remove= {remove}
             />
-          ))
+          )).reverse()
         }
       </div> :
       <SemArtigos />

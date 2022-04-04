@@ -2,4 +2,5 @@ import { ArticleThumbnailProps } from "../ArticleThumbnail/ArticleThumbnail.type
 
 export type ArticleListProps = {
   articles: ArticleThumbnailProps[];
+  remove?: (id:number) => Promise<void> 
 }
