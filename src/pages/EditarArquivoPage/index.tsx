@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import axios from "axios";
+import apiClient from "../../services/api-client"
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleForm } from "../../components/ArticleForm";
@@ -35,13 +35,8 @@ export const EditarArquivoPage = () => {
 
   async function buscarArtigo() {
     
-    const response = await axios.get<ArticleThumbnailProps>(
-      `http://3.221.159.196:3307/artigos/${id}`,
-      {
-        headers: {
-          'Authorization': `bearer ${token}`
-        }
-      }
+    const response = await apiClient.get<ArticleThumbnailProps>(
+      `/artigos/${id}`
     );
     setArtigo(response.data);
   }
@@ -49,37 +44,23 @@ export const EditarArquivoPage = () => {
   async function handleSubmit (artigo: ArticleThumbnailProps) {
 
     if (artigo.id) {
-      await axios.patch(
-        `http://3.221.159.196:3307/artigos/${id}`, 
-        { ...artigo },
-        {
-          headers: {
-            'Authorization': `bearer ${token}`
-        }}
+      await apiClient.patch(
+        `/artigos/${id}`, 
+        { ...artigo }
       )   
       navigate(`/artigo/${artigo.id}`)    
     } else {
-      const response = await axios.post(
-        `http://3.221.159.196:3307/artigos`, 
-        { ...artigo },
-        {
-          headers: {
-            'Authorization': `bearer ${token}`
-        }}
+      const response = await apiClient.post(
+        `/artigos`, 
+        { ...artigo }
       )
-      
       navigate(`/artigo/${response.data.id}`)
     }
   }
   
   async function handleDelete () {
-    await axios.delete(
-      `http://3.221.159.196:3307/artigos/${id}`, 
-      {
-        headers: {
-          'Authorization': `bearer ${token}`
-        }
-      }
+    await apiClient.delete(
+      `http://3.221.159.196:3307/artigos/${id}`
     )
     navigate(`/artigos`)
   }

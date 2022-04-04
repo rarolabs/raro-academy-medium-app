@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "../../services/api-client"
 import { useEffect, useState } from "react";
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
@@ -12,11 +12,7 @@ export const ArtigosPage = () => {
 
     async function buscaArtigos() {
         const token = localStorage.getItem("access_token")
-        const response = await axios.get("http://3.221.159.196:3307/artigos", {
-            headers: {
-                "Authorization": `bearer ${token}`
-            }
-        })
+        const response = await apiClient.get("/artigos")
 
         setArticles( response.data )
         setShowComponent(true)
