@@ -1,9 +1,8 @@
+import { IArticle } from "../../pages/ArtigoPage/ArtigoPage.type";
+
 export type ArticleViewProps = {
-  article?: string;
-  autor: {
-    nome: string;
-    avatar: string;
-  };
+  article: IArticle;
   dataPublicacao: Date;
   tempoLeitura: string;
 }
+

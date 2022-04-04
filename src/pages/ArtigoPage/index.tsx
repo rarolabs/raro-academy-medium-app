@@ -2,36 +2,20 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleView } from "../../components/ArticleView";
-
-interface IArticle {
-  autor: {
-    id: number, 
-    nome: string, 
-    login: string,
-    senha: string
-    avatar: string, 
-  },
-  resumo: string, 
-  imagem: string, 
-  conteudo: string,
-}
+import { IArticle } from "./ArtigoPage.type";
 
 export const ArtigoPage = () => {
   const [ article, setArticle ] = useState< IArticle >({
     autor: {
       id: 0, 
       nome: "string", 
-      login: "",
-      senha: "",
       avatar: ""
     },
+    titulo: "",
     resumo: "", 
     imagem: "",
     conteudo: "",
-  });
-  const [ autor, setAutor ] = useState({
-    nome: article.autor.nome,
-    avatar: article.autor.avatar 
+    dataPublicacao: new Date(),
   });
   const [dataPublicacao, setDataPublicacao] = useState(new Date());
   const [ showComponent, setshowComponent ] = useState(false)
@@ -48,18 +32,15 @@ export const ArtigoPage = () => {
         }
       }
     )
-    
     setArticle(response.data)   
     setshowComponent(true)
-    setAutor(response.data.autor)
   }
 
   return (
     showComponent ?
       <div className="m-10">
         <ArticleView
-          article={article.conteudo}
-          autor={autor}
+          article={article}
           dataPublicacao={dataPublicacao}
           tempoLeitura={ '10min' }
         />
