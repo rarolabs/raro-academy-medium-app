@@ -105,7 +105,7 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
             <Button 
               type="submit">Salvar</Button>
 
-            {article && <Button 
+            {article.id !== 0 && <Button 
               className={`
               w-full mt-6 tracking-widest
               border-b-red-600 bg-red-500 py-3 text-white font-bold
