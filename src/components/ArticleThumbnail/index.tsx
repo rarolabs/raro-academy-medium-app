@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
@@ -10,9 +11,11 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   tempoLeitura = '7 min',
   autor,
   editavel,
+  id
 }) => {
   return (
-    <div className="w-10/12 flex flex-col mt-5">    
+    <div className="flex flex-col w-2/3 mt-5">
+      <Link to={`/artigo/${id}`}>
       <header className="flex flex-row gap-3 items-center">
         <img
           src={ autor.avatar }
@@ -31,10 +34,16 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
             { resumo }
           </div>
         </div>
-        <div className="flex items-center" style={{ maxHeight: '100px' }}>
-          <img className="mt-10" src={ imagem } />
+        <div className="flex items-center h-[100px]">
+          <img
+            className="mt-10"
+            src={imagem}
+            alt={`imagem-do-artigo-${titulo}`}
+         />
         </div>
       </div>
+      </Link>
+      <Link to={`/artigos/editar/${id}`}>
       <footer className="flex flex-row pt-7 gap-3 items-center">
         <div className="text-gray-500 text-xs my-1">
           { tempoLeitura } de leitura
@@ -55,6 +64,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
           )
         }
       </footer>
+      </Link>
       <hr className="mt-5" />
     </div>
   );
