@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
@@ -17,7 +18,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
 
   return (
     <div className="w-10/12 flex flex-col mt-5">
-      <a href={url}>
+      <Link to={url}>
         <header className="flex flex-row gap-3 items-center">
           <img
             src={autor.avatar}
@@ -61,7 +62,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
           }
         </footer>
         <hr className="mt-5" />
-      </a>
+      </Link>
     </div>
 
   );
