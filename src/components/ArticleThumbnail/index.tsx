@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
 export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
-  imagem,
-  titulo,
-  resumo,
+  id,  
+  image,
+  title,
+  summary,
   dataPublicacao,
   tempoLeitura = '7 min',
   autor,
   editavel,
-  id
 }) => {
+
+  const [editable, setEditable] = useState(false)
+
+  useEffect(() => {
+    const activeUser = Number(localStorage.getItem('id'));
+    
+    setEditable(autor.id === activeUser)
+  }, [autor]);
+
   return (
     <div className="flex flex-col w-2/3 mt-5">
       <Link to={`/artigo/${id}`}>
@@ -28,17 +37,17 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
       <div className="grid grid-cols-4 gap-3">
         <div className="col-span-3 flex flex-col">
           <div className="font-bold text-lg pt-3">
-            { titulo }
+            { title }
           </div>
           <div className="font-light pt-2 text-base text-gray-600">
-            { resumo }
+            { summary }
           </div>
         </div>
         <div className="flex items-center h-[100px]">
           <img
             className="mt-10"
-            src={imagem}
-            alt={`imagem-do-artigo-${titulo}`}
+            src={image}
+            alt={`imagem-do-artigo-${title}`}
          />
         </div>
       </div>
