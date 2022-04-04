@@ -1,0 +1,28 @@
+.semArtigos {
+    margin: 0 auto;
+    margin-top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(40, 40, 41);
+    box-shadow: 1px 6px 10px 0px rgba(0, 0, 0, 0.103);
+    width: 410px;
+    padding: 20px 30px;
+    border-radius: 8px;
+}
+
+.semArtigos h1 {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.semArtigos div {
+    color: rgba(71, 68, 240, 0.856);
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 10px;
+}
