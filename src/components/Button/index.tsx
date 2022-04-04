@@ -2,12 +2,14 @@ import React from "react";
 
 export type ButtonProps = {
   type: "button" | "submit" | "reset" | undefined;
+  disabled?: boolean;
 };
 
 export const Button: React.FC<ButtonProps> = ({
   type,
   children,
 }) => {
+  
   return (
     <button
       type={ type }
