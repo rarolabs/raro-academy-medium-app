@@ -1,25 +1,41 @@
 import { useEffect, useState } from "react";
 import faker from "@faker-js/faker";
 import { ArticleView } from "../../components/ArticleView";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Artigo } from "../../types/API";
 
 export const ArtigoPage = () => {
+  const param = useParams();
+  const idArtigo = param["id"]
+
   const [article, setArticle] = useState<string>('');
-  const [autor] = useState({
+  const [autor, setAutor] = useState({
     nome: faker.name.firstName(),
     avatar: faker.image.avatar(),
   });
-  const [dataPublicacao] = useState(new Date());
+  const [tempoLeitura, setTempoLeitura] = useState('')
+
+
+  const [dataPublicacao, setdataPublicacao] = useState(new Date());
 
   useEffect(() => {
-    async function loadArticle() {
+    async function carregarArtigo() {
       // este article.md precisa ser adicionado, temporariamente ao nosso código. Podemos copiar este conteúdo dentro da nossa pasta /public.
       // sugiro que você retire este documento de `src/stories/assets/markdown/article.md`
-      const response = await fetch('/article.md');
-      const article = await response.text();
-      setArticle(article);
+      // const response = await fetch('/article.md');
+      // const article = await response.text();
+      // setArticle(article);
+      const url = `http://3.221.159.196:3307/artigos/${idArtigo}`;
+      const response = await axios.get<Artigo>(url);
+      setArticle(response.data.conteudo);
+      setAutor(response.data.autor);
+      setdataPublicacao(new Date(response.data.dataPublicacao));
+      setTempoLeitura(response.data.tempoDeLeitura)
+
     }
 
-    loadArticle();
+    carregarArtigo();
   }, []);
 
   return (
@@ -28,7 +44,7 @@ export const ArtigoPage = () => {
         article={article}
         autor={autor}
         dataPublicacao={dataPublicacao}
-        tempoLeitura={'10min'}
+        tempoLeitura={tempoLeitura}
       />
     </div>
   );

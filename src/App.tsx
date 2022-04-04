@@ -12,9 +12,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ArtigosPage/> } />
+        <Route path="/artigo/:id" element={<ArtigoPage />} />
+        
         {/* <Route path="/login" element={<LoginPage />} />
     <Route path="/" element={<ArtigosPage />} />
-    <Route path="/artigo/:id" element={<ArtigoPage />} />
     <Route path="/artigos" element={<MeusArtigosPage />} />
     <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
     <Route path="/artigos/novo" element={<EditarArquivoPage />} /> */}

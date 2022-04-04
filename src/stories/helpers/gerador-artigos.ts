@@ -3,6 +3,7 @@ import { ArticleThumbnailProps } from '../../components/ArticleThumbnail/Article
 
 export const geraArtigos = (quantidade: number): ArticleThumbnailProps[] => {
   return Array.from(new Array(quantidade)).map(() => ({
+    id: faker.random.number(),
     imagem: faker.image.imageUrl(),
     titulo: faker.lorem.sentence(),
     resumo: faker.lorem.paragraph(),
