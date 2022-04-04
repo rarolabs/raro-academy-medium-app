@@ -5,18 +5,24 @@ import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/Article
 
 export const ArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
+  const [carregando, setCarregando] = useState(true);
   const url = "http://3.221.159.196:3307/artigos"
   const BuscarArtigos = async () => {
     const response = await axios.get(url);
-    setArticles(response.data)
+    setArticles(response.data);
+    setCarregando(false);
   }
   useEffect(() => { BuscarArtigos() }, []);
 
-  if (articles.length === 0) {
+  if (carregando) {
     return (
-      <p>Não existem artigos publicados</p>
+      <p className="font-bold text-center">Carregando Artigos...</p>
     )
-
+  }
+  else if (articles.length === 0) {
+    return (
+      <p className="font-bold text-center">Não existem artigos publicados</p>
+    )
   }
   else {
     return (
