@@ -13,7 +13,7 @@ export const EditarArquivoPage = () => {
     imagem: "",
     titulo: "",
     resumo: "",
-    dataPublicacao: new  Date,
+    dataPublicacao: new Date,
     autor: {
       nome: "",
       avatar: "",
@@ -21,48 +21,68 @@ export const EditarArquivoPage = () => {
     },
     conteudo: ""
   })
+  const [ erro, setErro ] = useState('')
   const { id } = useParams();
-  
-  const token = localStorage.getItem("access_token");
 
   const navigate = useNavigate()
 
   useEffect(() => { 
-    if (id) {
-      buscarArtigo();
-    }
+    id && buscarArtigo();
   }, [id]);
 
   async function buscarArtigo() {
-    
-    const response = await apiClient.get<ArticleThumbnailProps>(
-      `/artigos/${id}`
-    );
-    setArtigo(response.data);
+    setErro('')
+    try {
+      const response = await apiClient.get<ArticleThumbnailProps>(
+        `/artigos/${id}`
+      );
+      setArtigo(response.data);
+    } catch (error: any) {
+      error.response.data.statusCode === 401 ?
+        setErro('Unauthorized') :
+        setErro('Erro ao buscar artigo')
+    }
   }
   
   async function handleSubmit (artigo: ArticleThumbnailProps) {
+    setErro('')
 
     if (artigo.id) {
-      await apiClient.patch(
-        `/artigos/${id}`, 
-        { ...artigo }
-      )   
-      navigate(`/artigo/${artigo.id}`)    
+      try {
+        await apiClient.patch<ArticleThumbnailProps>(
+          `/artigos/${id}`, 
+          { ...artigo }
+        )   
+        navigate(`/artigo/${artigo.id}`)    
+      } catch (error: any) {
+        error.response.data.statusCode === 401 ? 
+          setErro("Unauthorized") :
+          setErro('Erro ao editar artigo')
+      }
     } else {
-      const response = await apiClient.post(
-        `/artigos`, 
-        { ...artigo }
-      )
-      navigate(`/artigo/${response.data.id}`)
+      try {
+        const response = await apiClient.post(
+          `/artigos`, 
+          { ...artigo }
+        )
+        navigate(`/artigo/${response.data.id}`)
+      } catch (error: any) {
+        error.response.data.statusCode === 401 ?
+          setErro("Unauthorized") : 
+          setErro('Erro ao criar novo artigo')
+      }
     }
   }
   
   async function handleDelete () {
-    await apiClient.delete(
-      `http://3.221.159.196:3307/artigos/${id}`
-    )
-    navigate(`/artigos`)
+    try {
+      await apiClient.delete( `/artigos/${id}`)
+      navigate(`/artigos`)
+    } catch (error:any) {
+      error.response.data.statusCode === 401 ?
+        setErro('Unauthorized') : 
+        setErro('Erro ao deletar artigo')
+    }
   }
 
   return (
@@ -71,7 +91,7 @@ export const EditarArquivoPage = () => {
       article={artigo}
       onClick={handleDelete}
       onSubmitProp={handleSubmit}
-        />
+      />
     </div>
   );
 };

@@ -7,17 +7,22 @@ import { Carregando } from "../../components/Carregando";
 export const ArtigosPage = () => {
     const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
     const [ showComponent, setShowComponent ] = useState(false)
-
+    const [ erro, setErro ] = useState('')
     useEffect(() => { buscaArtigos() }, []);
 
     async function buscaArtigos() {
-        const token = localStorage.getItem("access_token")
-        const response = await apiClient.get("/artigos")
+        setErro('')
 
-        setArticles( response.data )
+        try { 
+            const response = await apiClient.get<ArticleThumbnailProps[]>("/artigos")
+            setArticles( response.data )
+        } catch (error:any) { 
+            error.response.data.statusCode === 401 ? 
+                setErro("Unauthorized") :
+                setErro("Erro ao buscar artigos");
+        }
         setShowComponent(true)
     }
-    console.log(showComponent)
 
     return ( showComponent ? 
         <ArticleList articles={articles}/> :

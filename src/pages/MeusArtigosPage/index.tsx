@@ -7,16 +7,24 @@ import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/Article
 export const MeusArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
   const [ showComponent, setShowComponent ] = useState(false)
+  const [ erro, setErro ] = useState("")
 
   async function buscaMeusArtigos() {
-    const token = localStorage.getItem("access_token")
-    
-    const response = await apiClient.get<ArticleThumbnailProps[]>(
-      '/artigos/meus-artigos'
-    );
 
-    setArticles(response.data);
-    setShowComponent(true)
+    setErro('')
+    
+    try { 
+      const response = await apiClient.get<ArticleThumbnailProps[]>
+      ('/artigos/meus-artigos');
+
+      setArticles(response.data);
+    } catch (error: any) {
+      error.response.data.statusCode === 401 ?
+        setErro('Unauthorized') :
+        setErro('Erro ao buscar artigos');
+    }
+
+    setShowComponent(true) 
   }
 
   useEffect(() => {

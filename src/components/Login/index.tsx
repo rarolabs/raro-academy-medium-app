@@ -23,7 +23,7 @@ export const Login = () => {
       const response = await apiClient.post(
         "/auth/login",
         {login, senha}
-        )
+      )
         
       const { access_token, id } = response.data
       if (access_token) {
@@ -32,11 +32,9 @@ export const Login = () => {
         navigate("/artigos");
       } 
     } catch (error: any) {
-      if (error.response.data.statusCode === 401) {
-        setErro('Usuário ou senha Inválidos');
-      } else {
-        setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
-      }
+        error.response.data.statusCode === 401 ?
+          setErro('Usuário ou senha Inválidos'):
+          setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
     }
 
     setLoading(false)  
