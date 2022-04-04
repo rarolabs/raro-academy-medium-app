@@ -35,6 +35,7 @@ export const RitchTextEditor: React.FC<RitchTextEditorProps> = ({
         className="block my-2 text-xs font-semibold text-gray-600 uppercase"
       >{ label }</label>
       <MdEditor
+        value={value}
         style={{ height: '500px' }}
         renderHTML={text => mdParser.render(text)}
         onChange={ handleEditorChange }

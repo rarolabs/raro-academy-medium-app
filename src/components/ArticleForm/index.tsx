@@ -7,7 +7,7 @@ import { Input } from "../Input";
 import { RitchTextEditor } from "../RitchTextEditor";
 
 interface IArticleFormProps {
-  article?: ArticleThumbnailProps, 
+  article: ArticleThumbnailProps, 
   onClick: () => void,
   onSubmitProp?: (article: ArticleThumbnailProps) => void,
 }
@@ -74,7 +74,7 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
             required
           />
           <Input
-            placeholder="Breve rewsumo do artigo"
+            placeholder="Breve resumo do artigo"
             type="textarea"
             name="resumo"
             label="Resumo"
@@ -84,7 +84,7 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
           />
 
           <Input
-            placeholder="Breve rewsumo do artigo"
+            placeholder="Imagem do artigo"
             type="file"
             name="image"
             label="Banner"

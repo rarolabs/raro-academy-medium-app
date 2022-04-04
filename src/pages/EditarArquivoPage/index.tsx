@@ -8,7 +8,19 @@ import { useNavigate } from "react-router-dom";
 
 export const EditarArquivoPage = () => {
   
-  const [ artigo, setArtigo ] = useState<ArticleThumbnailProps>()
+  const [ artigo, setArtigo ] = useState<ArticleThumbnailProps>({
+    id: 0,
+    imagem: "",
+    titulo: "",
+    resumo: "",
+    dataPublicacao: new  Date,
+    autor: {
+      nome: "",
+      avatar: "",
+      id: 0,
+    },
+    conteudo: ""
+  })
   const { id } = useParams();
   
   const token = localStorage.getItem("access_token");
