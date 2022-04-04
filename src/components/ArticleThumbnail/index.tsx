@@ -18,9 +18,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
 
   useEffect (()=> {
     const idLocalStorage = Number(localStorage.getItem("id"))
-
     setEditavel(idLocalStorage === autor.id)
-
   }, [autor])
 
   return (

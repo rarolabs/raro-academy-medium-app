@@ -1,4 +1,3 @@
-/* src/pages/MeusArtigos/index.tsx */
 import axios from "axios";
 import { useEffect, useState } from "react";
 

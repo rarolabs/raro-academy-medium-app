@@ -1,10 +1,7 @@
-/* src/pages/Artigo/index.tsx */
-import faker from "@faker-js/faker";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleView } from "../../components/ArticleView";
-import { Carregando } from "../../components/Carregando";
 
 interface IArticle {
   autor: {
@@ -33,8 +30,8 @@ export const ArtigoPage = () => {
     conteudo: "",
   });
   const [ autor, setAutor ] = useState({
-    nome: "",
-    avatar: ""
+    nome: article.autor.nome,
+    avatar: article.autor.avatar 
   });
   const [dataPublicacao, setDataPublicacao] = useState(new Date());
   const [ showComponent, setshowComponent ] = useState(false)
@@ -54,6 +51,7 @@ export const ArtigoPage = () => {
     
     setArticle(response.data)   
     setshowComponent(true)
+    setAutor(response.data.autor)
   }
 
   return (
@@ -61,7 +59,7 @@ export const ArtigoPage = () => {
       <div className="m-10">
         <ArticleView
           article={article.conteudo}
-          autor={{nome: article.autor.nome, avatar: article.autor.avatar }}
+          autor={autor}
           dataPublicacao={dataPublicacao}
           tempoLeitura={ '10min' }
         />

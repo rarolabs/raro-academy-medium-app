@@ -1,6 +1,5 @@
 import "./styles.css"
 
-
 export function SemArtigos () {
     return (
         <div className="semArtigos">

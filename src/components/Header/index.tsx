@@ -1,4 +1,3 @@
-/* src/components/Header/index.tsx */
 import { Navigation } from "../Navigation";
 
 export const Header = () => (
