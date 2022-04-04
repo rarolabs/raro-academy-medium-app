@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleView } from "../../components/ArticleView";
+import { Carregando } from "../../components/Carregando";
 
 interface IArticle {
   autor: {
@@ -36,7 +37,7 @@ export const ArtigoPage = () => {
     avatar: ""
   });
   const [dataPublicacao, setDataPublicacao] = useState(new Date());
-
+  const [ showComponent, setshowComponent ] = useState(false)
   const { id } = useParams()
 
   useEffect(() => { buscaArtigo() }, []);
@@ -52,18 +53,19 @@ export const ArtigoPage = () => {
     )
     
     setArticle(response.data)   
+    setshowComponent(true)
   }
 
   return (
-    article.conteudo !== ""  ?
-    <div className="m-10">
-      <ArticleView
-        article={article.conteudo}
-        autor={{nome: article.autor.nome, avatar: article.autor.avatar }}
-        dataPublicacao={dataPublicacao}
-        tempoLeitura={ '10min' }
-      />
-    </div> :
-    <div></div>
+    showComponent ?
+      <div className="m-10">
+        <ArticleView
+          article={article.conteudo}
+          autor={{nome: article.autor.nome, avatar: article.autor.avatar }}
+          dataPublicacao={dataPublicacao}
+          tempoLeitura={ '10min' }
+        />
+      </div> :
+      <Carregando />
   );
 };

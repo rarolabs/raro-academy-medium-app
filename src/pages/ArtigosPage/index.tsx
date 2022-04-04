@@ -2,12 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
-import { SemArtigos } from "../../components/SemArtigos";
-import { geraArtigos } from "../../stories/helpers/gerador-artigos";
+import { Carregando } from "../../components/Carregando";
 
 export const ArtigosPage = () => {
     const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
-    const [ control, setControl ] = useState(false)
+    const [ showComponent, setShowComponent ] = useState(false)
 
     useEffect(() => { buscaArtigos() }, []);
 
@@ -20,15 +19,12 @@ export const ArtigosPage = () => {
         })
 
         setArticles( response.data )
-        setControl(true)
+        setShowComponent(true)
     }
-    console.log(control)
+    console.log(showComponent)
 
-    if (control) {
-        console.log("ole")
-        return (<ArticleList articles={articles}/> ) 
-    }
-    return (
-        <div />
+    return ( showComponent ? 
+        <ArticleList articles={articles}/> :
+        <Carregando /> 
     );
 };

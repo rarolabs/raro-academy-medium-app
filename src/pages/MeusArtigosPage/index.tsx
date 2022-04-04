@@ -9,10 +9,9 @@ import { geraArtigos } from "../../stories/helpers/gerador-artigos";
 
 export const MeusArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
-  const [ control, setControl ] = useState(false)
+  const [ showComponent, setShowComponent ] = useState(false)
 
   async function buscaMeusArtigos() {
-
     const token = localStorage.getItem("access_token")
     
     const response = await axios.get<ArticleThumbnailProps[]>(
@@ -25,19 +24,15 @@ export const MeusArtigosPage = () => {
     );
 
     setArticles(response.data);
-    setControl(true)
+    setShowComponent(true)
   }
 
   useEffect(() => {
     buscaMeusArtigos();
   }, []);
 
-
-  if (control) {
-    console.log("ole")
-    return (<ArticleList articles={articles}/> ) 
-  }
-  return (
+  return ( showComponent ?
+    <ArticleList articles={articles}/> :
     <div />
   );
 };
