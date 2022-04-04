@@ -5,6 +5,8 @@ import { ArticleThumbnailProps } from "../ArticleThumbnail/ArticleThumbnail.type
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { RitchTextEditor } from "../RitchTextEditor";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface IArticleFormProps {
   article: ArticleThumbnailProps, 
@@ -22,6 +24,8 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
   const [resumo, setResumo] = useState("");
   const [imagem, setImagem] = useState("");
   const [conteudo, setConteudo] = useState("");
+
+  const navigate = useNavigate()
   
   useEffect(() => {
     if (article) {
@@ -82,7 +86,6 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
             onChange = { (e) => setResumo(e.target.value) }
             required
           />
-
           <Input
             placeholder="Imagem do artigo"
             type="file"
@@ -91,7 +94,6 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
             onChange = { transformaImagemEmBase64 }
             required
           />
-
           <RitchTextEditor
             label="Conteúdo"
             name="conteudo"
@@ -102,6 +104,7 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
           <div className="divButtons">
             <Button 
               type="submit">Salvar</Button>
+
             {article && <Button 
               className={`
               w-full mt-6 tracking-widest
@@ -110,6 +113,15 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
               `}
               onClick={onClick}
               type="button">Delete</Button>}
+
+              <Button 
+                onClick={() => navigate("/artigos")}
+                className={`
+                w-full mt-6 tracking-widest
+                border-b-gray-600 bg-gray-500 py-3 text-white font-bold
+                hover:bg-gray-400 active:translate-y-[0.125rem] active:border-b-gray-400
+                `}
+                type="button">Voltar</Button>
           </div>
 
         </form>

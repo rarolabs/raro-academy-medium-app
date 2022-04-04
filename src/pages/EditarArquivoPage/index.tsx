@@ -47,7 +47,7 @@ export const EditarArquivoPage = () => {
   }
   
   async function handleSubmit (artigo: ArticleThumbnailProps) {
-
+    
     if (artigo.id) {
       await axios.patch(
         `http://3.221.159.196:3307/artigos/${id}`, 
