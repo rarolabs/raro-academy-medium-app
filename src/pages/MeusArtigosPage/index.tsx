@@ -3,18 +3,15 @@ import { useEffect, useState } from "react";
 
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
-import { useNavigate } from "react-router-dom";
+import { DataContext } from "../../data/DataContext";
 
 export const MeusArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
   const [ showComponent, setShowComponent ] = useState(false)
   const [ erro, setErro ] = useState("")
   const [ artigoDeletado, setArtigoDeletado ] = useState(false)
-  
-  const navigate = useNavigate()
 
   async function buscaMeusArtigos() {
-
     setErro('')
     
     try { 
@@ -27,7 +24,6 @@ export const MeusArtigosPage = () => {
         setErro('Unauthorized') :
         setErro('Erro ao buscar artigos');
     }
-
     setShowComponent(true) 
   }
 
@@ -41,7 +37,7 @@ export const MeusArtigosPage = () => {
 
   async function remove(id:number) {
     try {
-      setArtigoDeletado(  await apiClient.delete(`/artigos/${id}`) )
+      setArtigoDeletado( await apiClient.delete(`/artigos/${id}`) )
     } catch (error:any ) {
       error.response.data.statusCode === 401 ?
         setErro('Unauthorized') :
@@ -50,9 +46,9 @@ export const MeusArtigosPage = () => {
   }
 
   return ( showComponent ?
-    <ArticleList 
-      articles={articles}
-      remove= {remove}/> :
+    <DataContext.Provider value={remove} >
+      <ArticleList articles={articles}/>
+    </DataContext.Provider> :
     <div />
   );
 };

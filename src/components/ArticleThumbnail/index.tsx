@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { DataContext } from "../../data/DataContext";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
@@ -11,11 +13,12 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   dataPublicacao,
   tempoLeitura = '7 min',
   autor,
-  remove,
 }) => {
   const verArtigo = `/artigo/${id}`
   const editarArtigo = `/artigos/editar/${id}`
   const [ editavel, setEditavel ] = useState(false)
+
+  const remove = useContext(DataContext)
 
   useEffect (()=> {
     const idLocalStorage = Number(localStorage.getItem("id"))
@@ -83,7 +86,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
                 rounded-full py-1 px-2 text-xs
                 `
               }
-              onClick={ () => remove?.(id)  } // Matheus que tipou
+              onClick={() => remove(id)}
               >
               Delete
             </button>

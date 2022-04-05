@@ -9,13 +9,6 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { Layout } from './components/Layout';
 import { RequireAuth } from './components/RequireAuth';
 
-// const Aluno = () => {
-//   const { aluno } = useParams()
-//   return (
-//     <Button type='button'>{aluno}</Button>
-//   )
-// }
-
 function App() {
   return (
     <>

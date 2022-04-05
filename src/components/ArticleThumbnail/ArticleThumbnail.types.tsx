@@ -12,5 +12,4 @@ export type ArticleThumbnailProps = {
   };
   editavel?: boolean;
   conteudo?: string;
-  remove?: (id:number) => Promise<void>
 }
