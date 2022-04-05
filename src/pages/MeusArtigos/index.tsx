@@ -10,7 +10,7 @@ export const MeusArtigosPage = () => {
     const response = await axios.get<ArticleThumbnailProps[]>(
       'http://3.221.159.196:3307/artigos/meus-artigos', {
         headers: {
-        Authorization: `bearer ${localStorage.token}`
+        Authorization: `bearer ${localStorage.access_token}`
       }}
     );
     setArticles(response.data);    

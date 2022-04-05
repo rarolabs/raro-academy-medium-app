@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArticleForm } from "../../components/ArticleForm";
-import axios from 'axios'
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
+import axios from 'axios'
 
 export const EditarArquivoPage = () => {
 
   const [ artigo, setArtigo ] = useState<ArticleThumbnailProps>();
   const { id } = useParams()
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("access_token")
   const navigator = useNavigate()
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const EditarArquivoPage = () => {
     }
   }
 
-  const deleteArticle = async (articleId: number) => {
+  const removeArticle = async (articleId: number) => {
     await axios.delete<ArticleThumbnailProps>(`http://3.221.159.196:3307/artigos/${articleId}`, {
         headers: {
           'Authorization': `bearer ${token}`
@@ -59,7 +59,7 @@ export const EditarArquivoPage = () => {
   return (
     <>
       <div className="items-center justify-center m-10">
-        <ArticleForm article={artigo} onSubmit={handleSubmit} deleteArticle={deleteArticle}/>
+        <ArticleForm article={artigo} onSubmit={handleSubmit} removeArticle={removeArticle}/>
       </div>
     </>
   );

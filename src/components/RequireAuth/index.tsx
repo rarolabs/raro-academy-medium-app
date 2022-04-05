@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export const RequireAuth: React.FC = () => {
     const [isAuthenticated, setAuthenticated] = useState(true);
     useEffect(() => {
-      setAuthenticated(localStorage.getItem("token") !== null);
+      setAuthenticated(localStorage.getItem("access_token") !== null);
     }, []);
   
     if (!isAuthenticated) {

@@ -8,11 +8,11 @@ export const Navigation = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setAuthenticated(localStorage.getItem("token") !== null);
+    setAuthenticated(localStorage.getItem("access_token") !== null);
   }, []);
 
   function logout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     localStorage.removeItem("id");
     setAuthenticated(false);
     navigate('/');

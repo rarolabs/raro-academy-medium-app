@@ -17,7 +17,7 @@ export const Login = () => {
     setLoading(true)
     try {
       const response = await axios.post('http://3.221.159.196:3307/auth/login', { login, senha })
-      localStorage.setItem('token', response.data.access_token)
+      localStorage.setItem('access_token', response.data.access_token)
       localStorage.setItem('id', response.data.id)
       navigate('/artigos')
     } catch (error: any) {
