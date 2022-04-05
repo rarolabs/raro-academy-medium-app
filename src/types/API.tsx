@@ -10,3 +10,8 @@ export type Usuario = {
   login: string;
   avatar: string;
 }
+
+export type Auth = {
+  access_token: string;
+  id: number;
+}
