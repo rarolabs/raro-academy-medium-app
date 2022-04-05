@@ -90,6 +90,7 @@ export const Login = () => {
           <div>
             <Button 
               disabled= {loading}
+              color="blue"
               type="submit" >
               {  loading ?  "Carregando..." : "Login" }
             </Button>

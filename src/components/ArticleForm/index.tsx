@@ -92,7 +92,7 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
             name="image"
             label="Banner"
             onChange = { transformaImagemEmBase64 }
-            required
+            required = { imagem === "" }
           />
           <RitchTextEditor
             label="Conteúdo"
@@ -103,24 +103,17 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
 
           <div className="divButtons">
             <Button 
+              color="blue"
               type="submit">Salvar</Button>
 
             {article.id !== 0 && <Button 
-              className={`
-              w-full mt-6 tracking-widest
-              border-b-red-600 bg-red-500 py-3 text-white font-bold
-              hover:bg-red-400 active:translate-y-[0.125rem] active:border-b-red-400
-              `}
+              color="red"
               onClick={onClick}
               type="button">Delete</Button>}
 
               <Button 
                 onClick={() => navigate("/artigos")}
-                className={`
-                w-full mt-6 tracking-widest
-                border-b-gray-600 bg-gray-500 py-3 text-white font-bold
-                hover:bg-gray-400 active:translate-y-[0.125rem] active:border-b-gray-400
-                `}
+                color="gray"
                 type="button">Voltar</Button>
           </div>
 
@@ -128,5 +121,11 @@ export const ArticleForm: React.FC<IArticleFormProps> = ({
       </div>
     </div>
   );
+
+  
+
+
+
+              
 };
 

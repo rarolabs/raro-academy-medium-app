@@ -39,7 +39,7 @@ export const MeusArtigosPage = () => {
     buscaMeusArtigos();
   }, [artigoDeletado]);
 
-  async function remove (id:number) {
+  async function remove(id:number) {
     try {
       setArtigoDeletado(  await apiClient.delete(`/artigos/${id}`) )
     } catch (error:any ) {
