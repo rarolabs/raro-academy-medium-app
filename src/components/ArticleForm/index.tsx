@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArticleThumbnailProps } from "../ArticleThumbnail/ArticleThumbnail.types";
 import { Button } from "../Button";
@@ -8,23 +8,24 @@ import { RitchTextEditor } from "../RitchTextEditor";
 type ArticleFormProps = {
   article?: ArticleThumbnailProps;
   onSubmit?: (article: ArticleThumbnailProps) => void;
-  deleteArticle?: (articleId: number) => void
+  removeArticle?: (articleOrder: number) => void;
 }
 
-export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, deleteArticle }) => {
+export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, removeArticle }) => {
 
-  const [title, setTitle] = useState('');
-  const [summary, setSummary] = useState('');
-  const [image, setImage] = useState('');
-  const [content, setContent] = useState('');
-  const navigate = useNavigate();
+  const [titulo, setTitulo] = useState("");
+  const [resumo, setResumo] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [conteudo, setConteudo] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (article) {
-      setTitle(article.title);
-      setSummary(article.summary);
-      setImage(article.image);
-      setContent(article.content || '');
+      console.log(article);
+      setTitulo(article.titulo);
+      setResumo(article.resumo);
+      setImagem(article.imagem);
+      setConteudo(article.conteudo || '');
     }
   }, [article]);
 
@@ -33,23 +34,24 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
     if (onSubmit) {
       const articleToSubmit = {
         ...article,
-        title,
-        summary,
-        image,
-        content,
+        titulo,
+        resumo,
+        imagem,
+        conteudo,
       };
       onSubmit(articleToSubmit as ArticleThumbnailProps)
     }
-  };
+  }
 
   const transformaImagemEmBase64 = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (event: any) => {
-      setImage(event.target.result)
-    }
+      setImagem(event.target.result);
+    };
   };
+
 
   return (
     <div className="grid min-h-screen mx-10 ">
@@ -64,8 +66,8 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
             type="text"
             name="titulo"
             label="Titulo"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={ titulo }
+            onChange={(e) => setTitulo(e.target.value)}
             required
           />
           <Input
@@ -73,53 +75,52 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSubmit, del
             type="textarea"
             name="resumo"
             label="Resumo"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
+            value={ resumo }
+            onChange={(e) => setResumo(e.target.value)}
             required
           />
 
           <Input
-            placeholder="Breve resumo do artigo"
+            placeholder="Imagem do artigo"
             type="file"
             name="image"
             label="Banner"
             onChange={transformaImagemEmBase64}
-            required={image === ''}
+            required={imagem === ""}
           />
 
           <RitchTextEditor
             label="Conteúdo"
             name="conteudo"
-            value={content}
-            onChange={ setContent }
+            value={ conteudo }
+            onChange={ setConteudo }
           />
-
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/3 px-3">
-              <Button type="submit">Salvar</Button>
+              <Button type="submit">SALVAR</Button>
             </div>
-            <div className="w-full md:w-1/3 px-3">
-              <button 
+          <div className="w-full md:w-1/3 px-3">
+            <button 
+              className={`
+                  w-full mt-6 tracking-widest
+                  border-b-gray-450 bg-gray-500 py-3 text-white
+                  hover:bg-gray-600 active:translate-y-[0.125rem] active:border-b-gray-400
+                `}
+              onClick={() => navigate('/artigos')}
+            >
+              VOLTAR
+            </button>
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <button 
                 className={`
-                    w-full mt-6 tracking-widest
-                    border-b-gray-600 bg-gray-500 py-3 text-white font-bold
-                    hover:bg-gray-400 active:translate-y-[0.125rem] active:border-b-gray-400
-                  `}
-                onClick={() => navigate('/artigos')}
-              >
-                Voltar
-              </button>
-            </div>
-            <div className="w-full md:w-1/3 px-3">
-              <button 
-                  className={`
-                    w-full mt-6 tracking-widest
-                    border-b-red-600 bg-red-500 py-3 text-white font-bold
-                    hover:bg-red-400 active:translate-y-[0.125rem] active:border-b-red-400
-                  `}
-                  onClick={() => {if(article && deleteArticle) deleteArticle(article.id)}}
-                >
-                  Deletar
+                  w-full mt-6 tracking-widest
+                  border-b-red-450 bg-red-500 py-3 text-white 
+                  hover:bg-red-600 active:translate-y-[0.125rem] active:border-b-red-400
+                `}
+                onClick={() => {if(article && removeArticle) removeArticle(article.id)}}
+            >
+              DELETAR
               </button>
             </div>
           </div>
