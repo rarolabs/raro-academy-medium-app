@@ -1,34 +1,34 @@
-import axios from "axios";
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../Button";
-import { Input } from "../Input";
+import axios from "axios"
+import React, { useState, ChangeEvent } from "react"
+import { Button } from "../Button"
+import { Input } from "../Input"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
 
-  const navigate = useNavigate();
-  const [login, setLogin] = useState<string>();
-  const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-  const [err, setErr] = useState<string>('');
+  const navigate = useNavigate()
+  const [login, setLogin] = useState<string>("")
+  const [senha, setSenha] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+  const [erro, setErro] = useState<string>("")
 
   const postLogin = async (event: React.FormEvent<HTMLFormElement>) : Promise<void> => {
     event.preventDefault()
     setLoading(true)
     try {
-      const response = await axios.post('http://3.221.159.196:3307/auth/login', { login, password })
+      const response = await axios.post('http://3.221.159.196:3307/auth/login', { login, senha })
       localStorage.setItem('token', response.data.access_token)
       localStorage.setItem('id', response.data.id)
       navigate('/artigos')
-    } catch (err: any) {
-      if (err.response.data.statusCode === 401) {
-        setErr('Usuário ou senha inválidos!')
+    } catch (error: any) {
+      if (error.response.data.statusCode === 401) {
+        setErro('Usuário ou senha Inválidos');
       } else {
-        setErr('Usuário não autenticado.')
+        setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
       }
       setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -40,7 +40,7 @@ export const Login = () => {
             alt="Workflow"
           />
         </div>
-        <form className="mt-8 space-y-6" action="#">
+        <form className="mt-8 space-y-6" action="#" onSubmit={postLogin}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="mt-5">
               <Input
@@ -48,9 +48,9 @@ export const Login = () => {
                 name="login"
                 label="Login"
                 placeholder="login"
-                value={ login }
-                onChange={ (e: ChangeEvent<HTMLInputElement>) => setLogin(e.target.value)}
                 required
+                value={ login }
+                onChange={ (e: ChangeEvent<HTMLInputElement>) => setLogin(e.target.value) }
               />
             </div>
 
@@ -60,13 +60,15 @@ export const Login = () => {
                 name="senha"
                 label="senha"
                 placeholder="********"
-                value={ password }
-                onChange={ (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value) }
                 required
+                value={ senha }
+                onChange={ (e: ChangeEvent<HTMLInputElement>) => setSenha(e.target.value) }
               />
             </div>
           </div>
-          {err && <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"> { err } </span>}
+          {erro && <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+            { erro }
+          </span>}
           <div>
             <Button type="submit" disabled={loading}>{loading ? 'Carregando...' : 'Login'}</Button>
           </div>

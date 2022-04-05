@@ -19,7 +19,6 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange
 }) => {
-
   const inputClassNames = `
     rounded-lg border border-gray-300 px-4 py-2 w-full
     block w-full p-3 mt-2
