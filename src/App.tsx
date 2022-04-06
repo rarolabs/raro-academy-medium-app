@@ -4,6 +4,7 @@ import {
   Route,
   Router,
 } from "react-router-dom";
+import { Layout } from "./components/Layout/Index";
 import { ArtigoPage } from "./pages/Artigo/Index";
 import { ArtigosPage } from "./pages/Artigos/Index";
 import LoginPage from "./pages/Login/Index";
@@ -14,10 +15,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ArtigosPage/> } />
-        <Route path="/artigo/:id" element={<ArtigoPage />} />
-        <Route path='/login' element={<LoginPage/>} />
-        <Route path="/artigos" element={<MeusArtigosPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        
+        <Route path='/' element={<Layout />}>
+          <Route index element={<ArtigosPage />} />
+          <Route path="/artigo/:id" element={<ArtigoPage />} />
+
+          <Route path="/artigos" element={<MeusArtigosPage />} />
+        </Route>
+
+
         {/* 
     <Route path="/" element={<ArtigosPage />} />
     
@@ -25,7 +32,7 @@ const App = () => {
     <Route path="/artigos/novo" element={<EditarArquivoPage />} /> */}
 
         <Route path="*" element={<NotFoundPage />} />
-      
+
       </Routes>
     </BrowserRouter>
   );
