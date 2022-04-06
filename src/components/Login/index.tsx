@@ -9,15 +9,25 @@ export const Login = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
   async function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const url = "http://3.221.159.196:3307/auth/login"
-    const response = await axios.post<Auth>(url, { login: login, senha: senha })
-    console.log(response.data.access_token)
-    if (response.data.access_token) {
-      navigate("/artigos")
+    try{
+      const response = await axios.post<Auth>(url, { login: login, senha: senha })
+      if (response.data.access_token) {
+        navigate("/artigos")
+      }
+    }
+    catch(erro: any){
+      if (erro.response.data.statusCode === 401) {
+        setMensagem("Usuário ou senha Inválidos")
+      } 
     }
 
+
+    
   }
 
   return (
@@ -55,6 +65,9 @@ export const Login = () => {
                 onChange={(e) => setSenha(e.target.value)}
               />
             </div>
+          </div>
+          <div className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+            {mensagem}
           </div>
           <div>
             <Button type="submit">Login</Button>
