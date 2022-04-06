@@ -14,20 +14,22 @@ export const Login = () => {
   async function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const url = "http://3.221.159.196:3307/auth/login"
-    try{
+    try {
       const response = await axios.post<Auth>(url, { login: login, senha: senha })
       if (response.data.access_token) {
+        localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("id", response.data.id.toString());
         navigate("/artigos")
       }
     }
-    catch(erro: any){
+    catch (erro: any) {
       if (erro.response.data.statusCode === 401) {
         setMensagem("Usuário ou senha Inválidos")
-      } 
+      }
     }
 
 
-    
+
   }
 
   return (
@@ -77,3 +79,11 @@ export const Login = () => {
     </div>
   )
 };
+
+function access_token(arg0: string, access_token: any) {
+  throw new Error("Function not implemented.");
+}
+function id(arg0: string, id: any) {
+  throw new Error("Function not implemented.");
+}
+
