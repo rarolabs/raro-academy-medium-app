@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import { ArticleList } from "../../components/ArticleList";
 import { ArticleThumbnailProps } from "../../components/ArticleThumbnail/ArticleThumbnail.types";
 import { Carregando } from "../../components/Carregando";
+import { useDeleted } from "../../data/DeletedContext";
 
 export const ArtigosPage = () => {
     const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
     const [ showComponent, setShowComponent ] = useState(false)
     const [ erro, setErro ] = useState('')
-    useEffect(() => { buscaArtigos() }, []);
 
+    const {deleted}= useDeleted()
+    
     async function buscaArtigos() {
         setErro('')
+        setShowComponent(false)
 
         try { 
             const response = await apiClient.get<ArticleThumbnailProps[]>("/artigos")
@@ -23,6 +26,9 @@ export const ArtigosPage = () => {
         }
         setShowComponent(true)
     }
+
+    useEffect(() => { buscaArtigos() }, []);
+    useEffect(() => { buscaArtigos() }, [deleted]);
 
     return ( showComponent ? 
         <ArticleList articles={articles}/> :

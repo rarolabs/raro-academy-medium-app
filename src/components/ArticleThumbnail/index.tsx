@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { DataContext } from "../../data/DataContext";
+import { useDeleted } from "../../data/DeletedContext";
 import { formataData } from "../../helpers/date";
+import apiClient from "../../services/api-client";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
 export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
@@ -17,8 +17,21 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   const verArtigo = `/artigo/${id}`
   const editarArtigo = `/artigos/editar/${id}`
   const [ editavel, setEditavel ] = useState(false)
+  const [ erro, setErro ] = useState('')
 
-  const remove = useContext(DataContext)
+  const {deleted, setDeleted} = useDeleted()
+  
+  async function remove(id:number) {
+    try {
+      await apiClient.delete(`/artigos/${id}`) 
+      deleted ? setDeleted(false) : setDeleted(true)
+      console.log("artigo deletado")
+    } catch (error:any ) {
+      error.response.data.statusCode === 401 ?
+        setErro('Unauthorized') :
+        setErro('Erro ao deletar artigo')
+    }
+  }
 
   useEffect (()=> {
     const idLocalStorage = Number(localStorage.getItem("id"))
