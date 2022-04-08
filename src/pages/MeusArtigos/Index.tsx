@@ -23,6 +23,11 @@ export const MeusArtigosPage = () => {
     chamadoNaApi()
   }, []);
 
+  if (exibirMensagem) {
+    return (
+      <p className="font-bold text-center">Não há artigos publicados</p>
+    )
+  }
   return (
     <div className="my-30">
       <ArticleList articles={articles} />
