@@ -21,11 +21,6 @@ export const ArtigoPage = () => {
 
   useEffect(() => {
     async function carregarArtigo() {
-      // este article.md precisa ser adicionado, temporariamente ao nosso código. Podemos copiar este conteúdo dentro da nossa pasta /public.
-      // sugiro que você retire este documento de `src/stories/assets/markdown/article.md`
-      // const response = await fetch('/article.md');
-      // const article = await response.text();
-      // setArticle(article);
       const url = `http://3.221.159.196:3307/artigos/${idArtigo}`;
       const response = await axios.get<Artigo>(url);
       setArticle(response.data.conteudo);

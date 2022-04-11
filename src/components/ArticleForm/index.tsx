@@ -19,6 +19,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ id, artigo }) => {
   const [imagem, setImagem] = useState<File>();
   const [resumo, setResumo] = useState("");
   const [conteudo, setConteudo] = useState("");
+  const url = 'http://3.221.159.196:3307/artigos'
 
   const gerarBase64 = (arquivo: File) => {
     return new Promise<string | null>((resolve, reject) => {
@@ -30,7 +31,6 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ id, artigo }) => {
   }
   const salvar = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const url = 'http://3.221.159.196:3307/artigos'
     const token = localStorage.getItem("access_token") ?? "";
     try {
       let imagemBase64 = "";
@@ -52,8 +52,8 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ id, artigo }) => {
 
       let response: AxiosResponse<ArtigoEditado, any>;
       if (id) {
-        if (dados.imagem === ""){
-          dados.imagem = artigo?.imagem??""
+        if (dados.imagem === "") {
+          dados.imagem = artigo?.imagem ?? ""
         }
         response = await axios.patch(`${url}/${id}`, dados, configs);
       }
@@ -67,6 +67,19 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ id, artigo }) => {
       console.log(erro.response.status)
     }
   }
+
+  const excluir = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const token = localStorage.getItem("access_token") ?? "";
+    const configs = {
+      headers: {
+        Authorization: `bearer ${token}`
+      }
+    };
+    const response = await axios.delete(`${url}/${id}`, configs);
+    navigate("/artigos")
+  }
+
   useEffect(() => {
     setTitulo(artigo?.titulo ?? "")
     setResumo(artigo?.resumo ?? "")
@@ -118,6 +131,13 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ id, artigo }) => {
 
           <Button type="submit">Salvar</Button>
         </form>
+        {
+          id && (
+            <form className="mt-6" action="#" onSubmit={excluir}>
+              <Button type="submit">Excluir</Button>
+            </form>
+          )
+        }
       </div>
     </div>
   );
