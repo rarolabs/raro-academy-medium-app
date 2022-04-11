@@ -8,14 +8,19 @@ export const MeusArtigosPage = () => {
   const [articles, setArticles] = useState<ArticleThumbnailProps[]>([]);
   const [exibirMensagem, setExibirMensagem] = useState(true);
   const url = "http://3.221.159.196:3307/artigos/meus-artigos"
+  
   const chamadoNaApi = async () => {
     const token = localStorage.getItem("access_token") ?? "";
-    const response = await axios.get(url, {
+    const response = await axios.get<ArticleThumbnailProps[]>(url, {
       headers: {
         Authorization: `bearer ${token}`
       }
     });
-    setArticles(response.data);
+    const editaveis = response.data.map(item => ({
+      ...item,
+      editavel: true
+    })) 
+    setArticles(editaveis);
     setExibirMensagem(response.data.length === 0);
   }
 

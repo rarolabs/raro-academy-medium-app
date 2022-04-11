@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Router,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import { Layout } from "./components/Layout/Index";
 import { ArtigoPage } from "./pages/Artigo/Index";
 import { ArtigosPage } from "./pages/Artigos/Index";
@@ -16,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<LoginPage />} />
-        
+
         <Route path='/' element={<Layout />}>
           <Route index element={<ArtigosPage />} />
           <Route path="/artigo/:id" element={<ArtigoPage />} />
@@ -26,7 +21,6 @@ const App = () => {
 
 
         {/* 
-    <Route path="/" element={<ArtigosPage />} />
     
     <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
     <Route path="/artigos/novo" element={<EditarArquivoPage />} /> */}
