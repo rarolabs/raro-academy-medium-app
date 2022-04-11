@@ -1,13 +1,19 @@
+import { type } from "@testing-library/user-event/dist/type";
 import { wait } from "@testing-library/user-event/dist/utils";
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArtigoEditado } from "../../types/API";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { RitchTextEditor } from "../RitchTextEditor";
 
-export const ArticleForm = () => {
+type ArticleFormProps = {
+  id?: number;
+  artigo?: ArtigoEditado;
+};
+
+export const ArticleForm: React.FC<ArticleFormProps> = ({ id, artigo }) => {
   const navigate = useNavigate();
   const [titulo, setTitulo] = useState("");
   const [imagem, setImagem] = useState<File>();
@@ -28,26 +34,45 @@ export const ArticleForm = () => {
     const token = localStorage.getItem("access_token") ?? "";
     try {
       let imagemBase64 = "";
-      if (imagem !== null) {
+      if (imagem) {
         imagemBase64 = await gerarBase64(imagem!) ?? ""
       }
 
-      const response = await axios.post<ArtigoEditado>(url, {
+      const dados = {
         titulo: titulo,
         imagem: imagemBase64,
         resumo: resumo,
         conteudo: conteudo
-      }, {
+      };
+      const configs = {
         headers: {
           Authorization: `bearer ${token}`
         }
-      });
+      };
+
+      let response: AxiosResponse<ArtigoEditado, any>;
+      if (id) {
+        if (dados.imagem === ""){
+          dados.imagem = artigo?.imagem??""
+        }
+        response = await axios.patch(`${url}/${id}`, dados, configs);
+      }
+      else {
+        response = await axios.post(url, dados, configs);
+      }
+
       navigate(`/artigo/${response.data.id}`)
     }
     catch (erro: any) {
       console.log(erro.response.status)
     }
   }
+  useEffect(() => {
+    setTitulo(artigo?.titulo ?? "")
+    setResumo(artigo?.resumo ?? "")
+    setConteudo(artigo?.conteudo ?? "")
+  }, [id, artigo])
+
   return (
     <div className="grid min-h-screen mx-10 ">
       <div>

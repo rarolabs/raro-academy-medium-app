@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import { Layout } from "./components/Layout/Index";
-import { EditarArquivoPage } from "./pages/Artigo/EditPage";
+import { EditarArtigoPage } from "./pages/Artigo/EditarArtigoPage";
 import { ArtigoPage } from "./pages/Artigo/Index";
+import { NovoArtigoPage } from "./pages/Artigo/NovoArtigo";
 import { ArtigosPage } from "./pages/Artigos/Index";
 import LoginPage from "./pages/Login/Index";
 import { MeusArtigosPage } from "./pages/MeusArtigos/Index";
@@ -18,17 +19,11 @@ const App = () => {
           <Route path="/artigo/:id" element={<ArtigoPage />} />
 
           <Route path="/artigos" element={<MeusArtigosPage />} />
-          <Route path="/artigos/novo" element={<EditarArquivoPage />} /> 
+          <Route path="/artigos/novo" element={<NovoArtigoPage />} />
+          <Route path="/artigos/editar/:id" element={<EditarArtigoPage />} />
         </Route>
-
-
-        {/* 
-    
-    <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
-     */}
-
         <Route path="*" element={<NotFoundPage />} />
- 
+
       </Routes>
     </BrowserRouter>
   );
