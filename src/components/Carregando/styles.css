@@ -1,0 +1,18 @@
+.carregando {
+    margin: 0 auto;
+    margin-top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(40, 40, 41);
+    box-shadow: 1px 6px 10px 0px rgba(0, 0, 0, 0.103);
+    width: 410px;
+    padding: 20px 30px;
+    border-radius: 8px;
+}
+
+.carregando h1 {
+    font-size: 32px;
+    font-weight: 500;
+}

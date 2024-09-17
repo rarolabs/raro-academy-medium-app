@@ -1,25 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {  Route, Routes } from 'react-router-dom';
+import { ArtigosPage } from './pages/ArtigosPage'
+import { LoginPage } from './pages/LoginPage';
+import { ArtigoPage } from './pages/ArtigoPage';
+import { MeusArtigosPage } from './pages/MeusArtigosPage';
+import { EditarArquivoPage } from './pages/EditarArquivoPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { Layout } from './components/Layout';
+import { RequireAuth } from './components/RequireAuth';
+import { DeletedContext } from './data/DeletedContext';
+import { useState } from 'react';
 
 function App() {
+  const [ deleted, setDeleted ] = useState<boolean>(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+    
+        <Route path="/" element={<Layout />}>
+          <Route 
+            index 
+            element={
+              <DeletedContext.Provider 
+                value={{ deleted, setDeleted }} >
+                <ArtigosPage />
+              </DeletedContext.Provider>
+            }
+          />
+          <Route path="/artigo/:id" element={<ArtigoPage />} />
+
+          <Route element={ <RequireAuth /> }>
+            <Route 
+              path="/artigos"
+              element={
+                <DeletedContext.Provider 
+                  value={{ deleted, setDeleted }} >
+                  <MeusArtigosPage />
+                </DeletedContext.Provider>
+              }
+            />
+            <Route path="/artigos/editar/:id" element={<EditarArquivoPage />} />
+            <Route path="/artigos/novo" element={<EditarArquivoPage />} />
+          </Route>
+        </Route>
+
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+    </>
   );
 }
 

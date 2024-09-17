@@ -1,4 +1,3 @@
-import React from "react";
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
@@ -7,13 +6,18 @@ import './ArticleView.css'
 import { ArticleViewProps } from "./ArticleView.type";
 import { formataData } from "../../helpers/date";
 
-
 export const ArticleView: React.FC<ArticleViewProps> = ({
   article,
-  autor,
   dataPublicacao,
+  tempoLeitura
 }) => {
+  const autor = {
+    nome: article.autor.nome,
+    avatar: article.autor.avatar 
+  }
+
   const mdParser = new MarkdownIt();
+
   return (
     <>
       <header className="flex flex-row gap-3 items-center ml-20">
@@ -21,7 +25,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
         <div className="block">
           <div>{ autor.nome }</div>
           <div className="text-sm text-gray-500">
-            { formataData(dataPublicacao) } · {/* { tempoLeitura } */} 7min de leitura
+            { formataData(dataPublicacao) } · { tempoLeitura } 
           </div>
         </div>
       </header>
@@ -30,7 +34,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
         renderHTML={text => mdParser.render(text)}
         readOnly
         view={{ md: false, menu: false, html: true }}
-        value={ article }
+        value={ article.conteudo }
       />
     </>
   );

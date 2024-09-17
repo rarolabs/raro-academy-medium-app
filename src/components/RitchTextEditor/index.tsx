@@ -7,10 +7,14 @@ import 'react-markdown-editor-lite/lib/index.css';
 export const RitchTextEditor: React.FC<RitchTextEditorProps> = ({
   label,
   name,
+  onChange, 
+  value
 }) => {
   const mdParser = new MarkdownIt();
   function handleEditorChange({ html, text }: any) {
-    console.log(html, text);
+    if (onChange) { 
+      onChange(text || '');
+    }
   }
 
   function onImageUpload(file: any) {
@@ -31,6 +35,7 @@ export const RitchTextEditor: React.FC<RitchTextEditorProps> = ({
         className="block my-2 text-xs font-semibold text-gray-600 uppercase"
       >{ label }</label>
       <MdEditor
+        value={value}
         style={{ height: '500px' }}
         renderHTML={text => mdParser.render(text)}
         onChange={ handleEditorChange }
